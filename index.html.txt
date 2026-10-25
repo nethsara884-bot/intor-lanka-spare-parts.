@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTOR LANKA | Quality Spare Parts for Automotive & Machinery</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font: Inter & Rajdhani for Industrial Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#1E293B',
+                            900: '#0A192F',
+                            950: '#020C1B',
+                        },
+                        brandOrange: '#F97316',
+                        brandOrangeHover: '#EA580C',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Rajdhani', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Mechanical gear subtle background pattern */
+        .gear-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#cbd5e1 0.75px, transparent 0.75px), radial-gradient(#cbd5e1 0.75px, #f8fafc 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0,15px 15px;
+        }
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.92) 0%, rgba(15, 23, 42, 0.85) 100%);
+        }
+        .dropdown-menu {
+            display: none;
+        }
+        .dropdown-hover:hover .dropdown-menu {
+            display: block;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0A192F;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F97316;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased gear-bg min-h-screen flex flex-col justify-between" id="app-body">
+
+    <!-- TOP ANNOUNCEMENT / CONTACT BAR -->
+    <div class="bg-navy-950 text-slate-300 text-xs sm:text-sm py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-4">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-brandOrange"></i> Panchikawatte, Colombo, Sri Lanka</span>
+                <span class="hidden md:inline text-slate-600">|</span>
+                <a href="tel:0778800709" class="hover:text-brandOrange transition flex items-center gap-1.5"><i class="fa-solid fa-phone text-brandOrange"></i> 077 880 0709</a>
+                <span class="hidden md:inline text-slate-600">|</span>
+                <a href="https://wa.me/94778800709" target="_blank" class="hover:text-green-400 transition flex items-center gap-1.5"><i class="fa-brands fa-whatsapp text-green-500 font-bold"></i> +94 77 880 0709</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-slate-400 hidden lg:inline">Your Trusted Source for Quality Spare Parts</span>
+                <button onclick="toggleAdminModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-2.5 py-1 rounded border border-slate-700 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-lock text-brandOrange text-xs"></i> <span id="admin-btn-text">Admin Login</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 bg-white shadow-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- LOGO AND BRANDING -->
+                <a href="#" onclick="filterByCategory('All')" class="flex items-center gap-3 group">
+                    <div class="relative w-11 h-11 bg-navy-900 rounded-lg flex items-center justify-center shadow-lg group-hover:bg-brandOrange transition-colors duration-300">
+                        <i class="fa-solid fa-gear text-brandOrange text-2xl group-hover:text-white transition-colors duration-300 animate-spin-slow"></i>
+                        <i class="fa-solid fa-circle-dot text-white text-xs absolute"></i>
+                    </div>
+                    <div>
+                        <span class="font-heading font-extrabold text-2xl sm:text-3xl tracking-tight text-navy-900 block leading-none">INTOR LANKA</span>
+                        <span class="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-500 block mt-1">SPARE PARTS SUPPLIER</span>
+                    </div>
+                </a>
+
+                <!-- DESKTOP NAV LINKS -->
+                <nav class="hidden lg:flex items-center gap-6 font-semibold text-sm text-slate-700 uppercase tracking-wide">
+                    <a href="#home" class="hover:text-brandOrange transition py-2">Home</a>
+                    <a href="#about" class="hover:text-brandOrange transition py-2">About Us</a>
+                    
+                    <!-- PRODUCTS DROPDOWN -->
+                    <div class="relative dropdown-hover py-2">
+                        <a href="#catalog" class="flex items-center gap-1 hover:text-brandOrange transition cursor-pointer">
+                            Products <i class="fa-solid fa-chevron-down text-xs ml-0.5"></i>
+                        </a>
+                        <div class="dropdown-menu absolute left-0 top-full w-72 bg-white rounded-lg shadow-xl border border-slate-200 py-2 z-50">
+                            <a href="#catalog" onclick="filterByCategory('Automotive Spare Parts')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Automotive Spare Parts</a>
+                            <a href="#catalog" onclick="filterByCategory('Motorcycle Spare Parts')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Motorcycle Spare Parts</a>
+                            <a href="#catalog" onclick="filterByCategory('Three-Wheeler Spare Parts')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Three-Wheeler Spare Parts</a>
+                            <a href="#catalog" onclick="filterByCategory('Truck & Bus Spare Parts')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Truck & Bus Spare Parts</a>
+                            <a href="#catalog" onclick="filterByCategory('Bearings')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Bearings</a>
+                            <a href="#catalog" onclick="filterByCategory('Engine Parts')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Engine Parts</a>
+                            <a href="#catalog" onclick="filterByCategory('Electrical Parts')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Electrical Parts</a>
+                            <a href="#catalog" onclick="filterByCategory('Brake System Parts')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Brake System Parts</a>
+                            <a href="#catalog" onclick="filterByCategory('Suspension & Steering Parts')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Suspension & Steering Parts</a>
+                            <a href="#catalog" onclick="filterByCategory('Industrial Machinery Parts')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Machinery & Industrial Parts</a>
+                            <a href="#catalog" onclick="filterByCategory('Agricultural Machinery Parts')" class="block px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-brandOrange">Agricultural Machinery Parts</a>
+                            <div class="border-t border-slate-100 my-1"></div>
+                            <a href="#catalog" onclick="filterByCategory('All')" class="block px-4 py-2 text-xs font-bold text-brandOrange hover:bg-orange-50">All Spare Parts</a>
+                        </div>
+                    </div>
+
+                    <a href="#categories" class="hover:text-brandOrange transition py-2">Machinery & Vehicles</a>
+                    <a href="#catalog" class="hover:text-brandOrange transition py-2">Catalogue</a>
+                    <a href="#contact" class="hover:text-brandOrange transition py-2">Contact Us</a>
+                </nav>
+
+                <!-- SEARCH & WHATSAPP QUICK BUTTON -->
+                <div class="hidden md:flex items-center gap-3">
+                    <div class="relative">
+                        <input type="text" id="nav-search-input" onkeyup="handleSearchInput(event)" placeholder="Search part #, name..." class="pl-9 pr-4 py-2 text-xs rounded-full border border-slate-300 focus:outline-none focus:border-brandOrange w-44 lg:w-56 transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                    </div>
+                    <a href="https://wa.me/94778800709" target="_blank" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2.5 px-4 rounded-full flex items-center gap-2 shadow hover:shadow-lg transition">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                    </a>
+                </div>
+
+                <!-- MOBILE MENU TOGGLE BUTTON -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-md text-slate-700 hover:text-brandOrange hover:bg-slate-100 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU DROPDOWN -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3 shadow-lg">
+            <div class="mb-3">
+                <input type="text" id="mobile-search-input" onkeyup="handleSearchInput(event)" placeholder="Search SKU or Spare Part Name..." class="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:border-brandOrange">
+            </div>
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-slate-800 font-semibold text-sm hover:text-brandOrange py-1">HOME</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-slate-800 font-semibold text-sm hover:text-brandOrange py-1">ABOUT US</a>
+            <div class="py-1">
+                <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Product Categories</span>
+                <div class="grid grid-cols-2 gap-1 pl-2 text-xs font-medium text-slate-600">
+                    <a href="#catalog" onclick="filterByCategory('Automotive Spare Parts'); toggleMobileMenu()" class="py-1 hover:text-brandOrange">Automotive Parts</a>
+                    <a href="#catalog" onclick="filterByCategory('Motorcycle Spare Parts'); toggleMobileMenu()" class="py-1 hover:text-brandOrange">Motorcycle Parts</a>
+                    <a href="#catalog" onclick="filterByCategory('Three-Wheeler Spare Parts'); toggleMobileMenu()" class="py-1 hover:text-brandOrange">Three-Wheeler Parts</a>
+                    <a href="#catalog" onclick="filterByCategory('Truck & Bus Spare Parts'); toggleMobileMenu()" class="py-1 hover:text-brandOrange">Truck & Bus Parts</a>
+                    <a href="#catalog" onclick="filterByCategory('Bearings'); toggleMobileMenu()" class="py-1 hover:text-brandOrange">Bearings</a>
+                    <a href="#catalog" onclick="filterByCategory('Engine Parts'); toggleMobileMenu()" class="py-1 hover:text-brandOrange">Engine Parts</a>
+                    <a href="#catalog" onclick="filterByCategory('Industrial Machinery Parts'); toggleMobileMenu()" class="py-1 hover:text-brandOrange">Industrial Parts</a>
+                    <a href="#catalog" onclick="filterByCategory('All'); toggleMobileMenu()" class="py-1 text-brandOrange font-bold">All Products &rarr;</a>
+                </div>
+            </div>
+            <a href="#catalog" onclick="toggleMobileMenu()" class="block text-slate-800 font-semibold text-sm hover:text-brandOrange py-1">CATALOGUE</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-800 font-semibold text-sm hover:text-brandOrange py-1">CONTACT US</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative bg-navy-900 text-white min-h-[520px] flex items-center justify-center overflow-hidden">
+        <!-- Workshop & Spare parts background image with overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1920&q=80" alt="Industrial Workshop Spare Parts" class="w-full h-full object-cover object-center opacity-30">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center lg:text-left">
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-slate-800/80 border border-slate-700 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-brandOrange">
+                        <i class="fa-solid fa-wrench"></i> Panchikawatte, Colombo Spare Parts Depot
+                    </div>
+                    
+                    <h1 class="font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight leading-none text-white">
+                        HIGH-QUALITY SPARE PARTS FOR <span class="text-brandOrange">AUTOMOTIVE & MACHINERY</span>
+                    </h1>
+
+                    <p class="text-slate-300 text-base sm:text-lg lg:text-xl font-normal max-w-2xl leading-relaxed">
+                        Discover quality spare parts for cars, motorcycles, three-wheelers, trucks, buses, and industrial machinery.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#catalog" class="w-full sm:w-auto bg-brandOrange hover:bg-brandOrangeHover text-white font-bold px-8 py-3.5 rounded-lg shadow-lg hover:shadow-orange-500/20 text-sm uppercase tracking-wider text-center transition">
+                            EXPLORE PRODUCTS
+                        </a>
+                        <a href="https://wa.me/94778800709?text=Hello%20INTOR%20LANKA,%20I%20would%20like%20to%20enquire%20about%20spare%20parts." target="_blank" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold px-7 py-3.5 rounded-lg shadow-lg text-sm uppercase tracking-wider text-center flex items-center justify-center gap-2 transition">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> CONTACT US ON WHATSAPP
+                        </a>
+                    </div>
+                </div>
+
+                <!-- QUICK STAT / FEATURE MINI HERO CARD -->
+                <div class="lg:col-span-4 hidden lg:block">
+                    <div class="bg-navy-800/90 border border-slate-700/80 backdrop-blur rounded-2xl p-6 text-left space-y-4 shadow-2xl">
+                        <h3 class="font-heading text-xl font-bold text-white uppercase border-b border-slate-700 pb-3 flex items-center justify-between">
+                            <span>Key Divisions</span>
+                            <i class="fa-solid fa-boxes-stacked text-brandOrange"></i>
+                        </h3>
+                        <ul class="space-y-3 text-xs text-slate-300">
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-car text-brandOrange"></i> Automotive & Motor Parts</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-motorcycle text-brandOrange"></i> Motorcycle & Three-Wheeler Parts</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-truck text-brandOrange"></i> Heavy Commercial Truck & Bus</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-compact-disc text-brandOrange"></i> Precision Industrial Bearings</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-tractor text-brandOrange"></i> Agricultural & Heavy Machinery</li>
+                        </ul>
+                        <div class="bg-slate-900/80 rounded-lg p-3 text-center border border-slate-700/50">
+                            <p class="text-[11px] text-slate-400">Direct Delivery & Pickup Available</p>
+                            <a href="tel:0778800709" class="text-sm font-bold text-brandOrange hover:underline">Call: 077 880 0709</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPANY INFORMATION CARD (SECTION 5) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+        <div class="bg-white rounded-xl shadow-xl border-t-4 border-brandOrange p-6 md:p-8">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 text-center lg:text-left">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brandOrange">INTOR LANKA SUPPLIES</span>
+                    <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-navy-900 uppercase">OUR CORE OFFERING</h2>
+                    <p class="text-slate-600 text-sm font-medium">
+                        Automotive, Motorcycle, Commercial Vehicle & Machinery Spare Parts
+                    </p>
+                </div>
+
+                <!-- INFO BADGES -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto">
+                    <!-- Address -->
+                    <div class="flex items-center gap-3 bg-slate-50 p-3.5 rounded-lg border border-slate-200">
+                        <div class="w-10 h-10 bg-navy-900 rounded-full flex items-center justify-center text-brandOrange shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] uppercase font-bold text-slate-400">Main Location</span>
+                            <span class="text-xs font-bold text-slate-800">Panchikawatte, Colombo, Sri Lanka</span>
+                        </div>
+                    </div>
+
+                    <!-- Mobile -->
+                    <a href="tel:0778800709" class="flex items-center gap-3 bg-slate-50 p-3.5 rounded-lg border border-slate-200 hover:border-brandOrange transition">
+                        <div class="w-10 h-10 bg-navy-900 rounded-full flex items-center justify-center text-brandOrange shrink-0">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] uppercase font-bold text-slate-400">Mobile Phone</span>
+                            <span class="text-xs font-bold text-slate-800">077 880 0709</span>
+                        </div>
+                    </a>
+
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/94778800709" target="_blank" class="flex items-center gap-3 bg-green-50 p-3.5 rounded-lg border border-green-200 hover:bg-green-100 transition">
+                        <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white shrink-0">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] uppercase font-bold text-green-700">WhatsApp Hotline</span>
+                            <span class="text-xs font-bold text-green-900">+94 77 880 0709</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED BRANDS SECTION (SECTION 6) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Confirmed & Compatible Brand Parts</h3>
+            <span class="text-[11px] text-slate-400 italic">Admin modifiable brand lineup</span>
+        </div>
+        <div id="brands-container" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+            <!-- Brand Badges populated by JS -->
+        </div>
+    </section>
+
+    <!-- PRODUCT CATEGORIES GRID (SECTION 7) -->
+    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <span class="text-xs font-bold uppercase tracking-widest text-brandOrange">Explore Specialties</span>
+            <h2 class="font-heading text-3xl font-extrabold text-navy-900 uppercase mt-1">PRODUCT CATEGORIES</h2>
+            <p class="text-slate-600 text-sm mt-2">Browse our wide spectrum of genuine replacement spare parts for all transport & industrial machinery.</p>
+        </div>
+
+        <div id="category-cards-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <!-- Dynamically populated category cards -->
+        </div>
+
+        <div class="mt-8 text-center">
+            <button onclick="filterByCategory('All')" class="inline-flex items-center gap-2 bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs uppercase px-6 py-3 rounded-lg shadow transition">
+                <i class="fa-solid fa-list-ul"></i> EXPLORE ALL PRODUCTS
+            </button>
+        </div>
+    </section>
+
+    <!-- DYNAMIC FEATURED PRODUCTS CATALOGUE (SECTION 8) -->
+    <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-brandOrange">Inventory Search</span>
+                <h2 class="font-heading text-3xl font-extrabold text-navy-900 uppercase mt-1">SPARE PARTS CATALOGUE</h2>
+                <p class="text-slate-600 text-xs sm:text-sm">Filter parts by category, search by product SKU or name.</p>
+            </div>
+
+            <!-- FILTERS -->
+            <div class="flex flex-wrap items-center gap-3">
+                <select id="category-filter-select" onchange="onCategorySelectChange(this.value)" class="bg-white border border-slate-300 text-slate-700 text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-brandOrange font-medium shadow-sm">
+                    <option value="All">All Categories</option>
+                    <!-- Options populated by JS -->
+                </select>
+
+                <div class="relative w-full sm:w-56">
+                    <input type="text" id="catalog-search" oninput="renderProducts()" placeholder="Filter parts or SKU..." class="w-full bg-white border border-slate-300 text-slate-700 text-xs rounded-lg pl-8 pr-3 py-2.5 focus:outline-none focus:border-brandOrange shadow-sm">
+                    <i class="fa-solid fa-search absolute left-2.5 top-3 text-slate-400 text-xs"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- CURRENT FILTER INDICATOR -->
+        <div class="mb-6 flex items-center gap-2">
+            <span class="text-xs text-slate-500">Active Category Filter:</span>
+            <span id="active-category-badge" class="bg-navy-900 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-2">
+                <span>All Spare Parts</span>
+                <button onclick="filterByCategory('All')" class="hover:text-brandOrange"><i class="fa-solid fa-times"></i></button>
+            </span>
+        </div>
+
+        <!-- PRODUCTS GRID -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Dynamic product cards rendered by JS -->
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US SECTION (SECTION 9) -->
+    <section class="bg-navy-900 text-white py-16 my-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-brandOrange">Our Strengths</span>
+                <h2 class="font-heading text-3xl font-extrabold uppercase mt-1">WHY CHOOSE INTOR LANKA?</h2>
+                <p class="text-slate-400 text-xs sm:text-sm mt-2">Delivering dependable automotive and industrial machinery components across Sri Lanka.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-navy-800/80 border border-slate-700/70 rounded-xl p-6 hover:border-brandOrange transition">
+                    <div class="w-12 h-12 bg-brandOrange/20 rounded-lg flex items-center justify-center text-brandOrange text-2xl mb-4">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="font-heading text-lg font-bold text-white uppercase mb-2">QUALITY SPARE PARTS</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">Find spare parts with clear product information, measurements, and technical specifications.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-navy-800/80 border border-slate-700/70 rounded-xl p-6 hover:border-brandOrange transition">
+                    <div class="w-12 h-12 bg-brandOrange/20 rounded-lg flex items-center justify-center text-brandOrange text-2xl mb-4">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                    <h3 class="font-heading text-lg font-bold text-white uppercase mb-2">WIDE PRODUCT CATEGORIES</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">Explore automotive, motorcycle, commercial vehicle, and machinery spare parts in one place.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-navy-800/80 border border-slate-700/70 rounded-xl p-6 hover:border-brandOrange transition">
+                    <div class="w-12 h-12 bg-brandOrange/20 rounded-lg flex items-center justify-center text-brandOrange text-2xl mb-4">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h3 class="font-heading text-lg font-bold text-white uppercase mb-2">EASY PRODUCT ENQUIRIES</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">Contact INTOR LANKA directly through WhatsApp to enquire about product specs and availability.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-navy-800/80 border border-slate-700/70 rounded-xl p-6 hover:border-brandOrange transition">
+                    <div class="w-12 h-12 bg-brandOrange/20 rounded-lg flex items-center justify-center text-brandOrange text-2xl mb-4">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="font-heading text-lg font-bold text-white uppercase mb-2">HELPFUL CUSTOMER SUPPORT</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">Contact our team in Panchikawatte for product details and assistance with your custom enquiries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT & CONTACT SECTION (SECTION 10 - TWO COLUMN LAYOUT) -->
+    <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-24">
+        <div class="grid lg:grid-cols-2 gap-12 items-center bg-white rounded-2xl shadow-lg border border-slate-200 p-6 md:p-10 overflow-hidden">
+            <!-- Left Side: Industrial Image -->
+            <div class="relative rounded-xl overflow-hidden h-80 lg:h-full min-h-[320px] shadow-md">
+                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80" alt="Spare parts workshop" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent flex items-end p-6">
+                    <div class="text-white">
+                        <span class="text-brandOrange text-xs font-bold uppercase tracking-wider">Panchikawatte Hub</span>
+                        <h4 class="font-heading text-xl font-bold uppercase">Sri Lanka's Auto & Machinery Parts Destination</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Contact Information -->
+            <div id="contact" class="space-y-6 scroll-mt-24">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-brandOrange">GET IN TOUCH</span>
+                    <h2 class="font-heading text-3xl font-extrabold text-navy-900 uppercase">CONTACT US</h2>
+                    <h3 class="text-xl font-bold text-slate-800 mt-1">INTOR LANKA</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                        We are a dedicated supplier of multi-brand automotive, motorcycle, commercial truck, bus, and industrial machinery spare parts located in the hub of Panchikawatte, Colombo.
+                    </p>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-slate-700">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-slate-100 text-brandOrange flex items-center justify-center shrink-0 mt-0.5">
+                            <i class="fa-solid fa-map-pin"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Address:</span>
+                            <span>Panchikawatte, Colombo, Sri Lanka</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-slate-100 text-brandOrange flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900">Mobile: </span>
+                            <a href="tel:0778800709" class="text-brandOrange font-bold hover:underline">077 880 0709</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-slate-100 text-brandOrange flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900">Telephone: </span>
+                            <a href="tel:0112470490" class="text-brandOrange font-bold hover:underline">011 247 0490</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WHATSAPP DIRECT ACTION -->
+                <div class="pt-2">
+                    <a href="https://wa.me/94778800709?text=Hello%20INTOR%20LANKA,%20I%20have%20a%20spare%20part%20enquiry." target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold text-xs uppercase px-8 py-3.5 rounded-lg shadow-lg transition">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> CONTACT US ON WHATSAPP (+94 77 880 0709)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (SECTION 11) -->
+    <footer class="bg-navy-950 text-slate-400 text-xs pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
+                <!-- Col 1: Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-brandOrange rounded flex items-center justify-center text-white">
+                            <i class="fa-solid fa-gear"></i>
+                        </div>
+                        <span class="font-heading font-extrabold text-2xl text-white tracking-wide">INTOR LANKA</span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        YOUR TRUSTED SOURCE FOR QUALITY SPARE PARTS. Serving automotive, motorcycle, truck, and machinery needs across Sri Lanka.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://wa.me/94778800709" target="_blank" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded text-xs border border-slate-700 transition">
+                            <i class="fa-brands fa-whatsapp text-green-400"></i> WhatsApp Us
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h4 class="font-heading text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Quick Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-brandOrange transition">Home</a></li>
+                        <li><a href="#about" class="hover:text-brandOrange transition">About Us</a></li>
+                        <li><a href="#categories" class="hover:text-brandOrange transition">Machinery & Vehicles</a></li>
+                        <li><a href="#catalog" class="hover:text-brandOrange transition">Catalogue</a></li>
+                        <li><a href="#contact" class="hover:text-brandOrange transition">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Categories -->
+                <div>
+                    <h4 class="font-heading text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Part Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#catalog" onclick="filterByCategory('Automotive Spare Parts')" class="hover:text-brandOrange transition">Automotive Parts</a></li>
+                        <li><a href="#catalog" onclick="filterByCategory('Motorcycle Spare Parts')" class="hover:text-brandOrange transition">Motorcycle & Three-Wheeler</a></li>
+                        <li><a href="#catalog" onclick="filterByCategory('Truck & Bus Spare Parts')" class="hover:text-brandOrange transition">Truck & Bus Components</a></li>
+                        <li><a href="#catalog" onclick="filterByCategory('Bearings')" class="hover:text-brandOrange transition">Precision Bearings</a></li>
+                        <li><a href="#catalog" onclick="filterByCategory('Industrial Machinery Parts')" class="hover:text-brandOrange transition">Industrial Machinery Parts</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact -->
+                <div>
+                    <h4 class="font-heading text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Store Address</h4>
+                    <p class="mb-2">Panchikawatte, Colombo, Sri Lanka</p>
+                    <p class="mb-1">Mobile: <a href="tel:0778800709" class="text-slate-200 hover:text-brandOrange font-bold">077 880 0709</a></p>
+                    <p class="mb-1">Tel: <a href="tel:0112470490" class="text-slate-200 hover:text-brandOrange font-bold">011 247 0490</a></p>
+                    <p class="mt-3 text-[11px] text-slate-500">Business Hours: Mon - Sat: 8:30 AM - 6:00 PM</p>
+                </div>
+            </div>
+
+            <!-- COPYRIGHT & LEGAL -->
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px]">
+                <p>&copy; <span id="year"></span> INTOR LANKA. All Rights Reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" onclick="alert('INTOR LANKA Privacy Policy: Your details provided via WhatsApp or enquiry are used strictly to process spare part orders.'); return false;" class="hover:text-slate-300">Privacy Policy</a>
+                    <a href="#" onclick="alert('Terms & Conditions: Prices and stock availability are subject to physical confirmation at Panchikawatte store.'); return false;" class="hover:text-slate-300">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PRODUCT DETAILS MODAL (SECTION 8/10) -->
+    <div id="product-modal" class="fixed inset-0 bg-slate-950/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+            <div class="p-4 sm:p-6 border-b border-slate-100 flex items-center justify-between sticky top-0 bg-white z-10">
+                <div>
+                    <span id="modal-category" class="text-[10px] uppercase font-bold text-brandOrange tracking-wider">Category</span>
+                    <h3 id="modal-title" class="font-heading text-xl sm:text-2xl font-bold text-navy-900">Product Title</h3>
+                </div>
+                <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center justify-center">
+                    <i class="fa-solid fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <div class="p-4 sm:p-6 grid md:grid-cols-2 gap-6">
+                <!-- Gallery with Dual Photo Toggle -->
+                <div class="space-y-3">
+                    <div class="aspect-square bg-slate-100 rounded-xl overflow-hidden border border-slate-200 relative">
+                        <img id="modal-main-img" src="" alt="Main Product Photo" class="w-full h-full object-cover">
+                        <span id="modal-stock-badge" class="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">In Stock</span>
+                    </div>
+
+                    <!-- Photo Thumbnails Toggle -->
+                    <div class="flex gap-3">
+                        <button onclick="switchModalPhoto(1)" class="flex-1 aspect-square max-w-[80px] rounded-lg border-2 border-brandOrange overflow-hidden" id="thumb-1-btn">
+                            <img id="modal-thumb-1" src="" class="w-full h-full object-cover">
+                        </button>
+                        <button onclick="switchModalPhoto(2)" class="flex-1 aspect-square max-w-[80px] rounded-lg border-2 border-slate-200 hover:border-brandOrange overflow-hidden" id="thumb-2-btn">
+                            <img id="modal-thumb-2" src="" class="w-full h-full object-cover">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Technical Details -->
+                <div class="space-y-4">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                            <span class="text-xs text-slate-500 font-semibold">Product Code / SKU:</span>
+                            <span id="modal-sku" class="text-xs font-mono font-bold text-navy-900">SKU-001</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                            <span class="text-xs text-slate-500 font-semibold">Brand / Manufacturer:</span>
+                            <span id="modal-brand" class="text-xs font-bold text-slate-800">NTN</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-1">
+                            <span class="text-xs text-slate-500 font-semibold">Price:</span>
+                            <span id="modal-price" class="text-base font-extrabold text-navy-900">LKR 4,500</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">Specifications & Description:</h4>
+                        <p id="modal-description" class="text-xs text-slate-600 leading-relaxed bg-white p-3 rounded-lg border border-slate-200 min-h-[80px]">
+                            Description details...
+                        </p>
+                    </div>
+
+                    <div class="pt-4 space-y-2">
+                        <a id="modal-wa-btn" href="#" target="_blank" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-xs uppercase tracking-wider shadow-md transition">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> ORDER VIA WHATSAPP NOW
+                        </a>
+                        <p class="text-[10px] text-slate-400 text-center">Instant inquiry sent directly to Panchikawatte team with product SKU pre-filled.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD MODAL (SECTION 12) -->
+    <div id="admin-modal" class="fixed inset-0 bg-navy-950/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-md">
+        <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] overflow-hidden flex flex-col shadow-2xl border border-slate-700">
+            <!-- Header -->
+            <div class="bg-navy-900 text-white p-4 sm:p-5 flex justify-between items-center shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 bg-brandOrange rounded-lg flex items-center justify-center text-white">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-heading text-lg font-bold uppercase">INTOR LANKA ADMIN DASHBOARD</h3>
+                        <p class="text-[10px] text-slate-300">Manage Inventory, Dual Photos, Stock & Prices</p>
+                    </div>
+                </div>
+                <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-white text-lg">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Login View -->
+            <div id="admin-login-view" class="p-8 max-w-sm mx-auto my-auto text-center space-y-4 w-full">
+                <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-navy-900 text-2xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h4 class="font-heading text-xl font-bold text-navy-900">ADMIN AUTHENTICATION</h4>
+                <p class="text-xs text-slate-500">Enter Admin Passcode to manage product database.</p>
+                <input type="password" id="admin-passcode" placeholder="Enter Passcode (default: intor123)" class="w-full text-center px-4 py-2.5 text-sm rounded-lg border border-slate-300 focus:outline-none focus:border-brandOrange">
+                <button onclick="checkAdminAuth()" class="w-full bg-brandOrange hover:bg-brandOrangeHover text-white font-bold py-2.5 rounded-lg text-xs uppercase tracking-wider transition">
+                    UNLOCK DASHBOARD
+                </button>
+            </div>
+
+            <!-- Authenticated Admin Content -->
+            <div id="admin-dashboard-view" class="hidden flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+                <!-- Admin Actions Toolbar -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-100 p-4 rounded-xl border border-slate-200">
+                    <div>
+                        <span class="text-xs font-bold text-navy-900 uppercase">Product Inventory Management</span>
+                        <p class="text-[11px] text-slate-500">Persistent database storage enabled in browser localStorage.</p>
+                    </div>
+                    <button onclick="openProductForm()" class="bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs uppercase px-4 py-2.5 rounded-lg flex items-center gap-2 transition">
+                        <i class="fa-solid fa-plus text-brandOrange"></i> ADD NEW PRODUCT
+                    </button>
+                </div>
+
+                <!-- PRODUCT FORM (ADD / EDIT) -->
+                <div id="product-form-container" class="hidden bg-slate-50 p-5 rounded-xl border-2 border-brandOrange space-y-4 shadow-inner">
+                    <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                        <h4 id="form-title" class="font-heading font-bold text-navy-900 uppercase">Add New Spare Part</h4>
+                        <button onclick="closeProductForm()" class="text-xs text-slate-500 hover:text-slate-800"><i class="fa-solid fa-times"></i> Close Form</button>
+                    </div>
+
+                    <form id="product-form" onsubmit="saveProduct(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <input type="hidden" id="form-product-id">
+
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Product Title *</label>
+                            <input type="text" id="form-title-input" required placeholder="e.g. NTN Wheel Bearing 6204" class="w-full p-2 rounded border border-slate-300">
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">SKU / Product Code *</label>
+                            <input type="text" id="form-sku-input" required placeholder="e.g. BRG-NTN-6204" class="w-full p-2 rounded border border-slate-300">
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Category *</label>
+                            <select id="form-category-input" required class="w-full p-2 rounded border border-slate-300">
+                                <!-- Options dynamically rendered -->
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Brand Name *</label>
+                            <input type="text" id="form-brand-input" required placeholder="e.g. NTN, KOYO, Denso" class="w-full p-2 rounded border border-slate-300">
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Price (LKR or 'Contact for Price') *</label>
+                            <input type="text" id="form-price-input" required placeholder="e.g. LKR 4,500 or Contact for Price" class="w-full p-2 rounded border border-slate-300">
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Stock Status *</label>
+                            <select id="form-stock-input" class="w-full p-2 rounded border border-slate-300">
+                                <option value="In Stock">In Stock</option>
+                                <option value="Contact for Availability">Contact for Availability</option>
+                                <option value="Out of Stock">Out of Stock</option>
+                            </select>
+                        </div>
+
+                        <div class="md:col-span-3">
+                            <label class="block font-bold text-slate-700 mb-1">Main Image URL *</label>
+                            <input type="url" id="form-img1-input" required placeholder="https://images.unsplash.com/..." class="w-full p-2 rounded border border-slate-300">
+                        </div>
+
+                        <div class="md:col-span-3">
+                            <label class="block font-bold text-slate-700 mb-1">Secondary Photo URL * (Dual Photo Support)</label>
+                            <input type="url" id="form-img2-input" required placeholder="https://images.unsplash.com/..." class="w-full p-2 rounded border border-slate-300">
+                        </div>
+
+                        <div class="md:col-span-3">
+                            <label class="block font-bold text-slate-700 mb-1">Technical Specifications / Description</label>
+                            <textarea id="form-desc-input" rows="3" placeholder="Enter specs, compatibility, dimensions..." class="w-full p-2 rounded border border-slate-300"></textarea>
+                        </div>
+
+                        <div class="md:col-span-3 flex justify-end gap-2 pt-2">
+                            <button type="button" onclick="closeProductForm()" class="px-4 py-2 bg-slate-200 text-slate-700 rounded font-bold">Cancel</button>
+                            <button type="submit" class="px-6 py-2 bg-brandOrange text-white rounded font-bold hover:bg-brandOrangeHover">SAVE PRODUCT</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- ADMIN INVENTORY TABLE -->
+                <div class="overflow-x-auto border border-slate-200 rounded-xl shadow-sm">
+                    <table class="w-full text-left text-xs text-slate-700">
+                        <thead class="bg-navy-900 text-white uppercase font-heading tracking-wider">
+                            <tr>
+                                <th class="p-3">Photos</th>
+                                <th class="p-3">SKU / Code</th>
+                                <th class="p-3">Product Name</th>
+                                <th class="p-3">Category</th>
+                                <th class="p-3">Brand</th>
+                                <th class="p-3">Price</th>
+                                <th class="p-3">Stock</th>
+                                <th class="p-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body" class="divide-y divide-slate-200 bg-white">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        // Set year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // CATEGORIES LIST
+        const CATEGORIES = [
+            'Automotive Spare Parts',
+            'Motorcycle Spare Parts',
+            'Three-Wheeler Spare Parts',
+            'Truck & Bus Spare Parts',
+            'Bearings',
+            'Engine Parts',
+            'Electrical Parts',
+            'Brake System Parts',
+            'Suspension & Steering Parts',
+            'Transmission & Clutch Parts',
+            'Filters & Lubrication Parts',
+            'Industrial Machinery Parts',
+            'Agricultural Machinery Parts',
+            'General Spare Parts'
+        ];
+
+        // CONFIRMED BRANDS LIST
+        const BRANDS = [
+            { name: 'NTN', type: 'Bearings' },
+            { name: 'NSK', type: 'Bearings' },
+            { name: 'KOYO', type: 'Bearings' },
+            { name: 'SKF', type: 'Bearings' },
+            { name: 'BOSCH', type: 'Electrical & Fuel' },
+            { name: 'DENSO', type: 'Electrical' },
+            { name: 'NGK', type: 'Ignition' },
+            { name: 'EXEDY', type: 'Clutch Parts' },
+            { name: '555', type: 'Suspension' },
+            { name: 'KYB', type: 'Shock Absorbers' },
+            { name: 'MAHLE', type: 'Filters & Engine' },
+            { name: 'Aisin', type: 'Transmission' }
+        ];
+
+        // INITIAL DEFAULT SEED PRODUCTS DATABASE
+        const DEFAULT_PRODUCTS = [
+            {
+                id: '1',
+                title: 'NTN Heavy Duty Wheel Hub Bearing',
+                sku: 'BRG-NTN-6204ZZ',
+                category: 'Bearings',
+                brand: 'NTN',
+                price: 'LKR 4,850',
+                stock: 'In Stock',
+                img1: 'https://images.unsplash.com/photo-1615840287214-7ff58936c4cf?auto=format&fit=crop&w=600&q=80',
+                img2: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
+                desc: 'Genuine Japan precision deep groove ball bearing suitable for automotive hubs and industrial shafting.'
+            },
+            {
+                id: '2',
+                title: 'Bosch High-Performance Spark Plug Set',
+                sku: 'EL-BOSCH-FR7DC',
+                category: 'Electrical Parts',
+                brand: 'BOSCH',
+                price: 'LKR 3,200',
+                stock: 'In Stock',
+                img1: 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=600&q=80',
+                img2: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=600&q=80',
+                desc: 'Premium nickel electrode spark plugs for optimized engine combustion and improved fuel efficiency.'
+            },
+            {
+                id: '3',
+                title: 'Heavy Truck Ceramic Brake Pad Set',
+                sku: 'BRK-TRK-7801',
+                category: 'Brake System Parts',
+                brand: 'BOSCH',
+                price: 'LKR 8,500',
+                stock: 'In Stock',
+                img1: 'https://images.unsplash.com/photo-1600706432522-e525f2316e10?auto=format&fit=crop&w=600&q=80',
+                img2: 'https://images.unsplash.com/photo-1615840287214-7ff58936c4cf?auto=format&fit=crop&w=600&q=80',
+                desc: 'High friction thermal ceramic brake pads designed for commercial buses and heavy duty trucks.'
+            },
+            {
+                id: '4',
+                title: 'Exedy Heavy Duty Clutch Disc Plate',
+                sku: 'TRN-EXD-3001',
+                category: 'Transmission & Clutch Parts',
+                brand: 'EXEDY',
+                price: 'Contact for Price',
+                stock: 'Contact for Availability',
+                img1: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80',
+                img2: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
+                desc: 'High torque friction lining clutch disc engineered for smooth engagement under severe loads.'
+            },
+            {
+                id: '5',
+                title: 'Three-Wheeler Piston & Ring Kit',
+                sku: 'ENG-TW-200CC',
+                category: 'Three-Wheeler Spare Parts',
+                brand: 'MAHLE',
+                price: 'LKR 6,200',
+                stock: 'In Stock',
+                img1: 'https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=600&q=80',
+                img2: 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=600&q=80',
+                desc: 'Precision cylinder piston and ring replacement assembly for 200cc 4-stroke petrol three-wheelers.'
+            },
+            {
+                id: '6',
+                title: 'Agricultural Tractor Hydraulic Filter',
+                sku: 'FLT-AGR-4040',
+                category: 'Agricultural Machinery Parts',
+                brand: 'MAHLE',
+                price: 'LKR 5,400',
+                stock: 'In Stock',
+                img1: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
+                img2: 'https://images.unsplash.com/photo-1615840287214-7ff58936c4cf?auto=format&fit=crop&w=600&q=80',
+                desc: 'High-flow micron hydraulic oil filter cartridge for agricultural machinery and harvesters.'
+            }
+        ];
+
+        // STATE MANAGEMENT
+        let products = [];
+        let selectedCategory = 'All';
+        let currentModalProduct = null;
+        let isAdminLoggedIn = false;
+
+        // INITIALIZATION
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            renderBrandBadges();
+            renderCategoryGrid();
+            populateCategoryDropdowns();
+            renderProducts();
+        });
+
+        // PERSISTENCE LOCAL STORAGE
+        function loadProducts() {
+            const stored = localStorage.getItem('intor_lanka_products');
+            if (stored) {
+                try {
+                    products = JSON.parse(stored);
+                } catch (e) {
+                    products = DEFAULT_PRODUCTS;
+                }
+            } else {
+                products = DEFAULT_PRODUCTS;
+                saveProductsToStorage();
+            }
+        }
+
+        function saveProductsToStorage() {
+            localStorage.setItem('intor_lanka_products', JSON.stringify(products));
+        }
+
+        // RENDER BRANDS (SECTION 6)
+        function renderBrandBadges() {
+            const container = document.getElementById('brands-container');
+            container.innerHTML = BRANDS.map(b => `
+                <div class="bg-white border border-slate-200 rounded-lg p-3 text-center shadow-sm hover:border-brandOrange hover:shadow transition">
+                    <span class="font-heading font-extrabold text-navy-900 text-sm tracking-wider block">${b.name}</span>
+                    <span class="text-[9px] text-slate-400 font-semibold uppercase block">${b.type}</span>
+                </div>
+            `).join('');
+        }
+
+        // RENDER CATEGORY GRID CARDS (SECTION 7)
+        function renderCategoryGrid() {
+            const container = document.getElementById('category-cards-grid');
+            
+            // Map sample icon/images per category
+            const icons = [
+                'fa-car', 'fa-motorcycle', 'fa-map-pin', 'fa-truck-front', 'fa-compact-disc',
+                'fa-oil-can', 'fa-bolt', 'fa-circle-stop', 'fa-arrows-spin', 'fa-gear',
+                'fa-filter', 'fa-industry', 'fa-tractor', 'fa-boxes-packing'
+            ];
+
+            container.innerHTML = CATEGORIES.map((cat, idx) => `
+                <div onclick="filterByCategory('${cat}')" class="bg-white rounded-xl border border-slate-200 hover:border-brandOrange p-4 text-center cursor-pointer shadow-sm hover:shadow-lg transition group">
+                    <div class="w-12 h-12 bg-slate-100 group-hover:bg-navy-900 rounded-xl flex items-center justify-center text-navy-900 group-hover:text-brandOrange mx-auto mb-3 transition-colors duration-300">
+                        <i class="fa-solid ${icons[idx % icons.length]} text-xl"></i>
+                    </div>
+                    <h4 class="font-heading text-xs font-bold text-navy-900 uppercase group-hover:text-brandOrange transition-colors">${cat}</h4>
+                </div>
+            `).join('');
+        }
+
+        // POPULATE DROPDOWNS
+        function populateCategoryDropdowns() {
+            const select = document.getElementById('category-filter-select');
+            const formSelect = document.getElementById('form-category-input');
+
+            select.innerHTML = `<option value="All">All Categories</option>` + 
+                CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('');
+
+            formSelect.innerHTML = CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('');
+        }
+
+        // FILTER LOGIC
+        function filterByCategory(cat) {
+            selectedCategory = cat;
+            document.getElementById('category-filter-select').value = cat;
+            document.getElementById('active-category-badge').querySelector('span').textContent = cat === 'All' ? 'All Spare Parts' : cat;
+            renderProducts();
+            
+            // Smooth scroll to catalog
+            const catalog = document.getElementById('catalog');
+            if(catalog) {
+                catalog.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function onCategorySelectChange(val) {
+            filterByCategory(val);
+        }
+
+        function handleSearchInput(e) {
+            const val = e.target.value;
+            document.getElementById('catalog-search').value = val;
+            renderProducts();
+        }
+
+        // RENDER PRODUCTS GRID (SECTION 8)
+        function renderProducts() {
+            const container = document.getElementById('products-grid');
+            const searchQuery = (document.getElementById('catalog-search').value || '').toLowerCase().trim();
+
+            let filtered = products.filter(p => {
+                const matchesCat = selectedCategory === 'All' || p.category === selectedCategory;
+                const matchesQuery = !searchQuery || 
+                    p.title.toLowerCase().includes(searchQuery) || 
+                    p.sku.toLowerCase().includes(searchQuery) ||
+                    p.brand.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesQuery;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white p-12 text-center rounded-xl border border-dashed border-slate-300">
+                        <i class="fa-solid fa-box-open text-4xl text-slate-300 mb-3"></i>
+                        <h4 class="font-heading text-lg font-bold text-slate-700 uppercase">No Spare Parts Found</h4>
+                        <p class="text-xs text-slate-500 mt-1">Try adjusting your category filter or search terms.</p>
+                        <button onclick="filterByCategory('All')" class="mt-4 bg-brandOrange text-white text-xs font-bold px-4 py-2 rounded-lg">Reset Filters</button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(p => {
+                const isStock = p.stock === 'In Stock';
+                const stockBadgeClass = isStock ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800';
+                
+                // Pre-formatted WhatsApp Message
+                const waText = encodeURIComponent(`Hello INTOR LANKA, I am interested in inquiring about:\nProduct: ${p.title}\nSKU/Code: ${p.sku}\nBrand: ${p.brand}\nPrice: ${p.price}`);
+                const waLink = `https://wa.me/94778800709?text=${waText}`;
+
+                return `
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col justify-between group">
+                        <!-- Product Dual Image Container -->
+                        <div class="relative aspect-square bg-slate-100 overflow-hidden cursor-pointer" onclick="openProductModal('${p.id}')">
+                            <img src="${p.img1}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" id="card-img-${p.id}">
+                            
+                            <!-- Dual photo hover indicator -->
+                            <div class="absolute bottom-2 right-2 bg-navy-900/80 text-white text-[10px] px-2 py-0.5 rounded backdrop-blur">
+                                <i class="fa-regular fa-images"></i> 2 Photos
+                            </div>
+
+                            <span class="absolute top-2 left-2 text-[9px] font-bold uppercase px-2 py-0.5 rounded-full ${stockBadgeClass}">
+                                ${p.stock}
+                            </span>
+                        </div>
+
+                        <!-- Card Details -->
+                        <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                            <div>
+                                <div class="flex items-center justify-between text-[10px] text-slate-400 font-bold uppercase mb-1">
+                                    <span>${p.brand}</span>
+                                    <span class="font-mono text-slate-500">${p.sku}</span>
+                                </div>
+                                <h3 onclick="openProductModal('${p.id}')" class="font-heading font-bold text-slate-900 text-sm leading-snug hover:text-brandOrange cursor-pointer transition line-clamp-2">
+                                    ${p.title}
+                                </h3>
+                            </div>
+
+                            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs text-slate-400">Price:</span>
+                                <span class="font-bold text-navy-900 text-sm">${p.price}</span>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="grid grid-cols-2 gap-2 pt-1">
+                                <button onclick="openProductModal('${p.id}')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-[11px] font-bold py-2 rounded uppercase transition">
+                                    DETAILS
+                                </button>
+                                <a href="${waLink}" target="_blank" class="w-full bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold py-2 rounded uppercase text-center flex items-center justify-center gap-1 shadow-sm transition">
+                                    <i class="fa-brands fa-whatsapp"></i> ENQUIRE
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // PRODUCT MODAL DETAILS
+        function openProductModal(id) {
+            const p = products.find(item => item.id === id);
+            if (!p) return;
+
+            currentModalProduct = p;
+            document.getElementById('modal-category').textContent = p.category;
+            document.getElementById('modal-title').textContent = p.title;
+            document.getElementById('modal-sku').textContent = p.sku;
+            document.getElementById('modal-brand').textContent = p.brand;
+            document.getElementById('modal-price').textContent = p.price;
+            document.getElementById('modal-description').textContent = p.desc || 'Contact INTOR LANKA for detailed vehicle compatibility and technical specifications.';
+            
+            // Stock badge
+            const stockBadge = document.getElementById('modal-stock-badge');
+            stockBadge.textContent = p.stock;
+            stockBadge.className = `absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase ${p.stock === 'In Stock' ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'}`;
+
+            // Photos
+            document.getElementById('modal-main-img').src = p.img1;
+            document.getElementById('modal-thumb-1').src = p.img1;
+            document.getElementById('modal-thumb-2').src = p.img2;
+
+            // Pre-formatted WhatsApp Order Link
+            const waText = encodeURIComponent(`Hello INTOR LANKA, I would like to place an order / enquiry for:\nProduct: ${p.title}\nSKU: ${p.sku}\nBrand: ${p.brand}\nPrice: ${p.price}`);
+            document.getElementById('modal-wa-btn').href = `https://wa.me/94778800709?text=${waText}`;
+
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function switchModalPhoto(photoNum) {
+            if (!currentModalProduct) return;
+            const mainImg = document.getElementById('modal-main-img');
+            const btn1 = document.getElementById('thumb-1-btn');
+            const btn2 = document.getElementById('thumb-2-btn');
+
+            if (photoNum === 1) {
+                mainImg.src = currentModalProduct.img1;
+                btn1.className = "flex-1 aspect-square max-w-[80px] rounded-lg border-2 border-brandOrange overflow-hidden";
+                btn2.className = "flex-1 aspect-square max-w-[80px] rounded-lg border-2 border-slate-200 hover:border-brandOrange overflow-hidden";
+            } else {
+                mainImg.src = currentModalProduct.img2;
+                btn2.className = "flex-1 aspect-square max-w-[80px] rounded-lg border-2 border-brandOrange overflow-hidden";
+                btn1.className = "flex-1 aspect-square max-w-[80px] rounded-lg border-2 border-slate-200 hover:border-brandOrange overflow-hidden";
+            }
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        // MOBILE MENU TOGGLE
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // ADMIN DASHBOARD LOGIC
+        function toggleAdminModal() {
+            const modal = document.getElementById('admin-modal');
+            modal.classList.toggle('hidden');
+            if (isAdminLoggedIn) {
+                renderAdminTable();
+            }
+        }
+
+        function checkAdminAuth() {
+            const code = document.getElementById('admin-passcode').value;
+            if (code === 'intor123' || code === 'admin') {
+                isAdminLoggedIn = true;
+                document.getElementById('admin-login-view').classList.add('hidden');
+                document.getElementById('admin-dashboard-view').classList.remove('hidden');
+                document.getElementById('admin-btn-text').textContent = "Admin Active";
+                renderAdminTable();
+            } else {
+                alert('Invalid Passcode! Try "intor123".');
+            }
+        }
+
+        function renderAdminTable() {
+            const tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = products.map(p => `
+                <tr class="hover:bg-slate-50">
+                    <td class="p-3">
+                        <div class="flex gap-1">
+                            <img src="${p.img1}" class="w-8 h-8 rounded object-cover border">
+                            <img src="${p.img2}" class="w-8 h-8 rounded object-cover border">
+                        </div>
+                    </td>
+                    <td class="p-3 font-mono font-bold">${p.sku}</td>
+                    <td class="p-3 font-semibold text-slate-900">${p.title}</td>
+                    <td class="p-3">${p.category}</td>
+                    <td class="p-3">${p.brand}</td>
+                    <td class="p-3 font-bold text-navy-900">${p.price}</td>
+                    <td class="p-3">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded ${p.stock === 'In Stock' ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'}">
+                            ${p.stock}
+                        </span>
+                    </td>
+                    <td class="p-3 text-right space-x-2">
+                        <button onclick="editProduct('${p.id}')" class="text-blue-600 hover:text-blue-800 font-bold"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                        <button onclick="deleteProduct('${p.id}')" class="text-red-600 hover:text-red-800 font-bold"><i class="fa-solid fa-trash"></i> Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openProductForm(id = null) {
+            document.getElementById('product-form-container').classList.remove('hidden');
+            const form = document.getElementById('product-form');
+            form.reset();
+
+            if (id) {
+                const p = products.find(item => item.id === id);
+                if (p) {
+                    document.getElementById('form-title').textContent = "Edit Spare Part";
+                    document.getElementById('form-product-id').value = p.id;
+                    document.getElementById('form-title-input').value = p.title;
+                    document.getElementById('form-sku-input').value = p.sku;
+                    document.getElementById('form-category-input').value = p.category;
+                    document.getElementById('form-brand-input').value = p.brand;
+                    document.getElementById('form-price-input').value = p.price;
+                    document.getElementById('form-stock-input').value = p.stock;
+                    document.getElementById('form-img1-input').value = p.img1;
+                    document.getElementById('form-img2-input').value = p.img2;
+                    document.getElementById('form-desc-input').value = p.desc;
+                }
+            } else {
+                document.getElementById('form-title').textContent = "Add New Spare Part";
+                document.getElementById('form-product-id').value = '';
+            }
+        }
+
+        function closeProductForm() {
+            document.getElementById('product-form-container').classList.add('hidden');
+        }
+
+        function saveProduct(e) {
+            e.preventDefault();
+            const id = document.getElementById('product-form-id')?.value || document.getElementById('form-product-id').value;
+            
+            const newProd = {
+                id: id || Date.now().toString(),
+                title: document.getElementById('form-title-input').value,
+                sku: document.getElementById('form-sku-input').value,
+                category: document.getElementById('form-category-input').value,
+                brand: document.getElementById('form-brand-input').value,
+                price: document.getElementById('form-price-input').value,
+                stock: document.getElementById('form-stock-input').value,
+                img1: document.getElementById('form-img1-input').value,
+                img2: document.getElementById('form-img2-input').value,
+                desc: document.getElementById('form-desc-input').value
+            };
+
+            if (id) {
+                const index = products.findIndex(p => p.id === id);
+                if (index !== -1) products[index] = newProd;
+            } else {
+                products.unshift(newProd);
+            }
+
+            saveProductsToStorage();
+            renderAdminTable();
+            renderProducts();
+            closeProductForm();
+            alert('Product saved successfully to persistent inventory database!');
+        }
+
+        function editProduct(id) {
+            openProductForm(id);
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products = products.filter(p => p.id !== id);
+                saveProductsToStorage();
+                renderAdminTable();
+                renderProducts();
+            }
+        }
+    </script>
+</body>
+</html>
